@@ -1,0 +1,22 @@
+{
+    "development": {
+        "dialect": "sqlite",
+        "storage": "./todo-app.sqlite3",
+        "migrationStorage": "sequelize",
+        "migrationStorageTableName": "sequelize_migration",
+        "seederStorage": "sequelize",
+        "seederStorageTableName": "sequelize_seeds"
+    },
+    "test": {
+        "dialect": "sqlite",
+        "storage": ":memory"
+    },
+    "production": {
+        "dialect": "sqlite",
+        "storage": "./todo-app.sqlite3",
+        "migrationStorage": "sequelize",
+        "migrationStorageTableName": "sequelize_migration",
+        "seederStorage": "sequelize",
+        "seederStorageTableName": "sequelize_seeds"
+    }
+}

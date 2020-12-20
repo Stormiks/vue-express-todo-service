@@ -1,0 +1,27 @@
+<template lang="pug">
+    WidgetTodoForm
+</template>
+
+<script>
+import WidgetTodoForm from "./todo-widget/WidgetTodoForm";
+
+export default {
+  components: {
+    WidgetTodoForm
+  },
+  created () {
+  },
+  mounted () {
+  },
+  methods: {
+  }
+}
+</script>
+
+<style lang="less">
+.tasks__list {
+  ul {
+    // max-width: 40%;
+  }
+}
+</style>
