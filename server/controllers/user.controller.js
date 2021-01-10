@@ -47,6 +47,7 @@ module.exports.register = (req, res) => {
 
 module.exports.profile = (req, res) => {
   user.findByPk(req.params.userId, {
+    attributes: ['id', 'name', 'login', 'avatar', 'admin'],
     include:[{
       model: task
     }]
