@@ -18,8 +18,8 @@ app.use(express.static('views'));
 require('./router/')(app);
 
 const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './todo-app.sqlite3'
+	dialect: 'sqlite',
+	storage: './todo-app.sqlite3'
 });
 
 const db = require('./db/models/');
@@ -27,13 +27,13 @@ const db = require('./db/models/');
 const port = process.env.PORT || 8081;
 
 app.listen(port, 'localhost', async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-    // db.sequelize.sync({ force: true });
-    db.sequelize.sync();
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-  console.log('server start', port);
+	try {
+		await sequelize.authenticate();
+		console.log('Connection has been established successfully.');
+		// db.sequelize.sync({ force: true });
+		db.sequelize.sync();
+	} catch (error) {
+		console.error('Unable to connect to the database:', error);
+	}
+	console.log('server start', port);
 });
