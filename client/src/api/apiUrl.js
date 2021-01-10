@@ -10,5 +10,7 @@ export default {
   taskDelete: `${baseUrlApi}/todos/del`,
   tasksAll: `${baseUrlApi}/todos`,
   taskGet: `${baseUrlApi}/todos`,
-  taskUpdate: `${baseUrlApi}/todos`
+  taskUpdate: `${baseUrlApi}/todos`,
+  taskComments: `${baseUrlApi}/todos/comments`,
+  commentAdd: `${baseUrlApi}/comments/add`
 }

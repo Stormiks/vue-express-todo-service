@@ -15,6 +15,7 @@ const upload = multer({
 const router = Router();
 const TaskController = require('../controllers/task.controller');
 const UserController = require('../controllers/user.controller');
+const CommentController = require('../controllers/comment.controller');
 const fs = require('fs')
 const path = require('path')
 
@@ -23,7 +24,10 @@ module.exports = (app) => {
   router.get('/todos', TaskController.findTasks);
   router.get('/todos/:taskId', TaskController.findTask);
   router.delete('/todos/del/:userId/:taskId', TaskController.deleteTask);
-  router.post('/todos/add', TaskController.addTask);
+	router.post('/todos/add', TaskController.addTask);
+
+  router.get('/todos/comments/:taskId', CommentController.findTaskComments);
+  router.post('/comments/add', CommentController.addComment);
 
   router.get('/profile/:userId', UserController.profile)
   router.post('/profile/:userId', upload.single("image"), UserController.updateProfile)

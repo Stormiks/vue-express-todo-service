@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     checked: DataTypes.BOOLEAN
   }, {});
   task.associate = function(models) {
-    // associations can be defined here
     task.belongsTo(models.user)
+    task.hasMany(models.comment)
   };
   return task;
 };
