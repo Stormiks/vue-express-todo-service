@@ -64,7 +64,11 @@ export default {
 
         return { error: 'Error load data' }
       }).catch(err => console.error(err))
-    }
+		},
+		fetchDetailInfoTask({  }, taskId) {
+			return tasksApi.getTask(taskId).then(res => res.data.task)
+			.catch(err => console.error(err))
+		}
   },
   getters: {
   }
