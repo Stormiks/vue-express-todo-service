@@ -6,6 +6,7 @@
 import WidgetTodoForm from "./todo-widget/WidgetTodoForm";
 
 export default {
+  name: 'Todo',
   components: {
     WidgetTodoForm
   },
