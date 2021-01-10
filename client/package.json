@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^4.5.3",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
     "miragejs": "^0.1.41",
