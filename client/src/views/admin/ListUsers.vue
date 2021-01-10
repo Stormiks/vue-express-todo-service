@@ -1,23 +1,39 @@
-<template lang="pug">
-  section.users
-    h1 {{ $route.meta.pageTitle }}
+<template>
+  <section class="users">
+    <h1>
+      {{ $route.meta.pageTitle }}
+    </h1>
 
-    table(v-if="users.length")
-      thead
-        tr
-          td ID
-          td Login
-          td Name
-          td Password
-          td Админ
-      tbody
-        tr(v-for="user in users")
-          td {{ user.id }}
-          td 
-            router-link(:to="{ path: `/admin/users/${user.id}`, params: { id: user.id }}") {{ user.login }}
-          td {{ user.name }}
-          td {{ user.password }}
-          td {{ user.admin ? 'Да' : 'Нет' }}
+    <table v-if="users.length">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Login</td>
+          <td>Name</td>
+          <td>Password</td>
+          <td>Админ</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="`${user.id}-${user.login}`">
+          <td>{{ user.id }}</td>
+          <td> 
+            <router-link
+              :to="{
+                path: `/admin/users/${user.id}`,
+                params: { id: user.id }
+              }"
+            >
+              {{ user.login }}
+            </router-link>
+          </td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.password }}</td>
+          <td>{{ user.admin ? 'Да' : 'Нет' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </template>
 
 <script>
