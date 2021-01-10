@@ -8,6 +8,12 @@
       router-view
 </template>
 
+<script>
+export default {
+	name: 'AdminLayout'
+}
+</script>
+
 <style lang="less">
 .sidebar {
   position: fixed;

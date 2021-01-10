@@ -18,7 +18,7 @@ import HeaderUserMenu from '@/components/HeaderUserMenu'
 import FooterAuthor from '@/components/FooterAuthor'
 
 export default {
-  name: 'default-layout',
+  name: 'DefaultLayout',
   components: {
     HeaderLogo,
     HeaderUserBar,
@@ -38,7 +38,7 @@ export default {
       form {
         max-width: 500px;
         margin: 0 auto;
-      } 
+      }
     }
   }
 </style>

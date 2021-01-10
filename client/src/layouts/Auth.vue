@@ -11,7 +11,7 @@ import Register from './../views/Register'
 import Login from './../views/Login'
 
 export default {
-  name: 'auth-layout',
+  name: 'AuthLayout',
   components: { Register, Login }
 }
 </script>
