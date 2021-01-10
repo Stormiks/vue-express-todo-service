@@ -20,11 +20,7 @@ export default {
    * @returns {Response|Promise}
    */
   getTask (taskId) {
-    return axios.get(url.taskGet, {
-      params: {
-        taskId
-      }
-    })
+    return axios.get(`${url.taskGet}/${taskId}`)
   },
   /**
    * Added new task
