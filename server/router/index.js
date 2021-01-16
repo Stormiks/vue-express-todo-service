@@ -13,13 +13,15 @@ const upload = multer({
 	dest: 'uploads/'
 })
 const router = Router();
+const AuthController = require('../controllers/auth.controller');
 const TaskController = require('../controllers/task.controller');
 const UserController = require('../controllers/user.controller');
 const CommentController = require('../controllers/comment.controller');
-const fs = require('fs')
-const path = require('path')
 
 module.exports = (app) => {
+	router.post('/login', AuthController.login);
+	router.post('/register', AuthController.register);
+
 	router.patch('/todos', TaskController.updateTask)
 	router.get('/todos', TaskController.findTasks);
 	router.get('/todos/:taskId', TaskController.findTask);
@@ -32,9 +34,7 @@ module.exports = (app) => {
 	router.get('/profile/:userId', UserController.profile)
 	router.post('/profile/:userId', upload.single("image"), UserController.updateProfile)
 
-	router.post('/login', UserController.login);
-	router.post('/register', UserController.register);
-	router.get('/users', UserController.all)
+	router.get('/users', UserController.all);
 
 	app.use('/api/', router);
 }
