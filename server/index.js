@@ -7,8 +7,6 @@ const cors = require('cors');
 const { Sequelize } = require('sequelize');
 const morgan = require('morgan');
 const app = express();
-// const jsonwebtoken = require('jsonwebtoken');
-const exjwt = require('express-jwt');
 const dotenv = require('dotenv');
 const crypto = require('crypto')
 
@@ -31,11 +29,6 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-exjwt({
-  secret: process.env.SECRET_JWT,
-  algorithms: ['HS256']
-})
 
 app.use(history());
 app.use('/file', express.static(path.join(__dirname, 'uploads')));
