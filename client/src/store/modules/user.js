@@ -9,9 +9,9 @@ const timestampLoggedIn = localStorage.getItem('timestamp')
 export default {
   state: {
     token: localStorage.getItem('token') || '',
-    loggedIn: JSON.parse(localStorage.getItem('logged')),
+    loggedIn: JSON.parse(localStorage.getItem('logged')) || false,
     timestampLoggedIn: timestampLoggedIn !== 'undefined' ? timestampLoggedIn : '',
-    profile: JSON.parse(localStorage.getItem('profile'))
+    profile: JSON.parse(localStorage.getItem('profile')) || {}
   },
   mutations: {
     CHANGE_STATUS_LOGGED_IN (state, { bool, timestamp }) {
@@ -34,7 +34,7 @@ export default {
       state.profile = {}
       state.timestampLoggedIn = ''
       state.token = ''
-      delete axios.defaults.headers.common
+      axios.defaults.headers.common['Authorization'] = ''
       localStorage.removeItem('token')
     }
   },
@@ -53,7 +53,7 @@ export default {
         const token = res.data.token
         const timestamp = res.data.timestamp
 
-        if (ctx && timestamp) {
+        if (ctx && timestamp && token) {
           commit('CHANGE_STATUS_LOGGED_IN', { bool: true, timestamp })
           commit('SET_TOKEN', token)
           commit('SET_PROFILE_INFO', ctx)
