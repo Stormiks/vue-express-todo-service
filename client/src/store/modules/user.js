@@ -1,3 +1,6 @@
+/* eslint-disable no-empty-pattern */
+
+import axios from 'axios'
 import authApi from './../../api/auth'
 import usersApi from './../../api/users'
 
@@ -5,6 +8,7 @@ const timestampLoggedIn = localStorage.getItem('timestamp')
 
 export default {
   state: {
+    token: localStorage.getItem('token') || '',
     loggedIn: JSON.parse(localStorage.getItem('logged')),
     timestampLoggedIn: timestampLoggedIn !== 'undefined' ? timestampLoggedIn : '',
     profile: JSON.parse(localStorage.getItem('profile'))
@@ -16,6 +20,11 @@ export default {
       localStorage.setItem('logged', bool)
       localStorage.setItem('timestamp', timestamp)
     },
+    SET_TOKEN(state, token) {
+      state.token = token
+      axios.defaults.headers.common['Authorization'] = token
+      localStorage.setItem('token', token)
+    },
     SET_PROFILE_INFO (state, profileInfo) {
       state.profile = profileInfo
       localStorage.setItem('profile', JSON.stringify(profileInfo))
@@ -24,6 +33,9 @@ export default {
       state.loggedIn = false
       state.profile = {}
       state.timestampLoggedIn = ''
+      state.token = ''
+      delete axios.defaults.headers.common
+      localStorage.removeItem('token')
     }
   },
   actions: {
@@ -38,10 +50,12 @@ export default {
     authLogin ({ commit }, user) {
       return authApi.postLogin(user).then(res => {
         const ctx = res.data.user
+        const token = res.data.token
         const timestamp = res.data.timestamp
 
         if (ctx && timestamp) {
           commit('CHANGE_STATUS_LOGGED_IN', { bool: true, timestamp })
+          commit('SET_TOKEN', token)
           commit('SET_PROFILE_INFO', ctx)
 
           return {

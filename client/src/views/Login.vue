@@ -36,8 +36,8 @@ export default {
   name: 'login',
   data () {
     return {
-      login: 'John_Doe',
-      pass: '',
+      login: 'Skylinker',
+      pass: '123456',
       loginError: false
     }
   },
