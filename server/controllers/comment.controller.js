@@ -29,13 +29,16 @@ module.exports.addComment = (req, res) => {
 	}).then(newComment => {
 		newComment.getUser({
 			attributes: ['id', 'name', 'login', 'avatar', 'admin']
-		}).then(sata => {
+		}).then(data => {
 			res.status(200).send({
-				id: newComment.id,
-				text: newComment.text,
-				user: sata,
-				taskId: newComment.taskId,
-				createdAt: newComment.createdAt,
+				message: 'Новый комментарий успешно добавлен',
+				comment: {
+					id: newComment.id,
+					text: newComment.text,
+					user: data,
+					taskId: newComment.taskId,
+					createdAt: newComment.createdAt,
+				}
 			})
 		})
 	}).catch(err => res.status(500).send({
