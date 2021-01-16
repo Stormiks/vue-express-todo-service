@@ -43,7 +43,7 @@ const sequelize = new Sequelize({
 
 const db = require('./db/models/');
 
-const port = process.env.PORT || 8081;
+const port = process.env.APP_PORT_NODE || 8081;
 
 app.listen(port, 'localhost', async () => {
 	try {
