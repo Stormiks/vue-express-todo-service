@@ -35,7 +35,14 @@ export default {
 				taskId: Number(this.todoId),
 				text: this.formInputComment
 			}).then(data => {
-				this.$$store.dispatch('addComment', data)
+				this.$store.dispatch('addComment', data).then(data => {
+					this.$notify({
+						group: 'private',
+						type: 'success',
+						title: data.author,
+						text: `${data.text}: ${data.msg}`
+					});
+				})
 				this.formInputComment = ''
 			})
 		}
