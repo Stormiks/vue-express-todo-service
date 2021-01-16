@@ -7,29 +7,15 @@
 			<strong>Заметка к задаче: </strong>
 			{{ task.text }}
 		</p>
-		<div class="task__comments_wrapper" :class="{ 'wrappper_border-top': comments.length }">
-			<ul v-if="comments.length">
-				<li v-for="comment in comments" :key="`${comment.id}-${id}`">
-					{{ comment.text }}
-				</li>
-			</ul>
+		<div class="task__comments_wrapper" :class="{ 'wrappper_border-top': countCommentsInTask }">
+			<todo-comments
+				v-if="countCommentsInTask"
+			></todo-comments>
+
 			<p v-else><strong>Комментариев к задаче нету</strong></p>
 			<div class="task__comments_input-box">
-				<form
-					class="task__comments__form"
-					@submit.prevent="addTaskComment"
-					@keydown.enter="addTaskComment"
-				>
-					<div class="form__field">
-						<label :for="`task-form-${id}`">Добавить комментарий:</label>
-						<textarea
-							v-model.trim="taskCommentInput"
-							:name="`task-${id}-comment`"
-							:id="`task-form-${id}`"
-						></textarea>
-					</div>
-					<button type="submit">Добавить</button>
-				</form>
+				<todo-add-comment-form
+				></todo-add-comment-form>
 			</div>
 		</div>
     <router-link :to="{ name: 'todo' }">К списку задач</router-link>
@@ -38,20 +24,27 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import TodoComments from './detail/TodoComments'
+import TodoAddCommentForm from './detail/TodoAddCommentForm'
 
 export default {
 	name: 'TodoDetail',
 	props: {
 		id: [String, Number]
 	},
+	components: {
+		TodoComments,
+		TodoAddCommentForm
+	},
 	data() {
 		return {
-			task: {},
-			comments: [],
-			taskCommentInput: ''
+			task: {}
 		}
 	},
 	computed: {
+		...mapGetters([
+			'countCommentsInTask'
+		]),
 		todoDetail() {
 			return this.$store.state.task.tasks.filter(t => t.id === Number(this.id))
 		}
@@ -62,18 +55,7 @@ export default {
 		})
 	},
 	mounted() {
-		this.$store.dispatch('fetchTaskComments', Number(this.id)).then(data => this.comments = data)
-	},
-	methods: {
-		addTaskComment() {
-			this.$store.dispatch('addComment', {
-				taskId: Number(this.id),
-				text: this.taskCommentInput
-			}).then(data => {
-				this.comments.push(data)
-				this.taskCommentInput = ''
-			})
-		}
+		this.$store.dispatch('fetchTaskComments', Number(this.id))
 	}
 }
 </script>
@@ -84,17 +66,6 @@ export default {
 }
 
 .task__comments {
-	&__form {
-		form& {
-			max-width: unset;
-		}
-
-		.form__field {
-			display: flex;
-			flex-direction: column;
-		}
-	}
-
 	&_wrapper {
 		padding-left: 1.5em;
 		padding-right: 1.5em;
