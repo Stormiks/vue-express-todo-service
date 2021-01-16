@@ -1,50 +1,6 @@
 const { sequelize, user, task } = require('../db/models/');
 
 
-module.exports.login = (req, res) => {
-	user.findOne({
-		where: {
-			login: req.body.login,
-			password: req.body.password
-		},
-		attributes: ['id', 'name', 'login', 'avatar', 'admin']
-	}).then(user => {
-		if (user)
-			res.status(200).send({
-				msg: 'Success!',
-				user,
-				timestamp: new Date()
-			});
-		else
-			res.status(404).send({
-				warning: 'Not found!',
-			})
-	}).catch(err => res.status(500).send({
-		msg: 'Error!',
-		trace: err
-	}));
-}
-
-module.exports.register = (req, res) => {
-	console.log(res.body);
-	if (req.body.password !== req.body.passwordConfirm) return res.status(400)
-
-	user.create({
-		login: req.body.login,
-		password: req.body.password,
-		name: ''
-	}).then(user => {
-		res.status(200).send({
-			msg: 'Success!',
-			user,
-			timestamp: new Date()
-		})
-	}).catch(err => res.status(500).send({
-		msg: 'Error!',
-		trace: err
-	}));
-}
-
 module.exports.profile = (req, res) => {
 	user.findByPk(req.params.userId, {
 		attributes: ['id', 'name', 'login', 'avatar', 'admin'],
