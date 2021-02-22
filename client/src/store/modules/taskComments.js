@@ -19,24 +19,26 @@ export default {
 				if (res.data) {
 					commit('SET_COMMENTS_TO_OPEN_TASK', res.data.comments)
 				}
-			})
-			.catch(err => console.error(err))
+			}).catch(err => console.error(err))
 		},
-		fetchTaskCommentsCount({}, taskId) {
-			return taskComments.getCommentCount(taskId).then(res => res.data.taskCommentsCount)
+		async fetchTaskCommentsCount({}, taskId) {
+			const res = await taskComments.getCommentCount(taskId)
+			return res.data.taskCommentsCount
 		},
-		addComment({ commit }, comment) {
+		async addComment({ commit }, comment) {
 			comment.userId = this.state.user.profile.id
-			return taskComments.postComment(comment).then(res => {
-				const comment = res.data.comment
-				commit('PUSH_COMMENT_TO_OPEN_TASK', comment)
+			try {
+				const res = await taskComments.postComment(comment)
+				const commentData = res.data.comment
+				commit('PUSH_COMMENT_TO_OPEN_TASK', commentData)
 				return {
 					msg: res.data.message,
-					text: comment.text,
-					author: comment.user.login
+					text: commentData.text,
+					author: commentData.user.login
 				}
-			})
-			.catch(err => console.error(err))
+			} catch (err) {
+				return console.error(err)
+			}
 		}
 	},
 	getters: {

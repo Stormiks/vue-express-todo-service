@@ -103,7 +103,7 @@ export default {
 
       commit('LOGOUT')
     },
-    getProfile ({ commit, state }) {
+    getProfile ({ state }) {
       return usersApi.getProfile(state.profile.id).then(res => {
         return res.data.user
       }).catch(err => {
@@ -113,7 +113,7 @@ export default {
         }
       })
     },
-    updateProfile ({ commit, state }, formData) {
+    updateProfile ({ state }, formData) {
       console.log(formData);
       usersApi.postUpdateProfile({
         userId: state.profile.id,

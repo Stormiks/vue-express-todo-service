@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-pattern */
 import tasksApi from './../../api/tasks'
 
 export default {
