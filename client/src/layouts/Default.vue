@@ -5,15 +5,15 @@
       <div class="d-flex align-items-center profile__bar">
         <HeaderUserBar />
         <HeaderUserMenu />
-			</div>
-		</header>
+      </div>
+    </header>
     <main>
       <router-view />
-		</main>
+    </main>
     <footer>
       <FooterAuthor />
-		</footer>
-	</div>
+    </footer>
+  </div>
 </template>
 
 <script>

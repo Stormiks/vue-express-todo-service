@@ -12,19 +12,19 @@
   export default {
     name: 'TodoComment',
     props: {
-			id: {
-				type: [String, Number],
-				required: true
-			},
-			author: [Object],
-			text: {
-				type: String,
-				default: ''
-			},
-			createdAt: {
-				type: String,
-				default: ''
-			},
+      id: {
+        type: [String, Number],
+        required: true,
+      },
+      author: [Object],
+      text: {
+        type: String,
+        default: '',
+      },
+      createdAt: {
+        type: String,
+        default: '',
+      },
     },
     computed: {
       convertDateCreated() {

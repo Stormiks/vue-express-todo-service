@@ -3,10 +3,10 @@
     <todo-comment
       v-for="comment in comments(taskId)"
       :key="`task-${comment.taskId}-comment-${comment.id}`"
-			:id="comment.id"
-			:author="comment.user"
-			:text="comment.text"
-			:created-at="comment.createdAt"
+      :id="comment.id"
+      :author="comment.user"
+      :text="comment.text"
+      :created-at="comment.createdAt"
     ></todo-comment>
   </ul>
 </template>
@@ -17,20 +17,20 @@
 
   export default {
     name: 'TodoComments',
-		props: {
-			taskId: {
-				type: [String, Number],
-				required: true
-			}
-		},
+    props: {
+      taskId: {
+        type: [String, Number],
+        required: true,
+      },
+    },
     components: {
       TodoComment,
     },
     computed: {
-			...mapGetters({
-				comments: 'getComments',
-			})
-		}
+      ...mapGetters({
+        comments: 'getComments',
+      }),
+    },
   }
 </script>
 

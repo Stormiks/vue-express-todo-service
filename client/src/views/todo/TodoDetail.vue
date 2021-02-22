@@ -26,9 +26,9 @@
     name: 'TodoDetail',
     props: {
       id: {
-				type: [String, Number],
-				required: true
-			},
+        type: [String, Number],
+        required: true,
+      },
     },
     components: {
       TodoComments,
@@ -41,15 +41,15 @@
     },
     computed: {
       ...mapGetters({
-				countComments: 'countCommentsInTask'
-			})
+        countComments: 'countCommentsInTask',
+      }),
     },
     created() {
       this.$store.dispatch('fetchDetailInfoTask', Number(this.id)).then(data => {
         this.task = data
       })
       this.$store.dispatch('fetchTaskComments', Number(this.id))
-    }
+    },
   }
 </script>
 

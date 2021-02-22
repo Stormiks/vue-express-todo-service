@@ -163,21 +163,21 @@ form
           &.transform-visible {
             transform: translateX(0);
             z-index: 0;
-						outline: none;
-						box-shadow: none;
+            outline: none;
+            box-shadow: none;
 
-						svg {
-							stroke: #000;
-							fill: #fff;
-							border-radius: 100%;
-						}
+            svg {
+              stroke: #000;
+              fill: #fff;
+              border-radius: 100%;
+            }
 
-						&:focus {
-							svg {
-								stroke: #bd2130;
-								box-shadow: 0 0 5px 1px #bd2130;
-							}
-						}
+            &:focus {
+              svg {
+                stroke: #bd2130;
+                box-shadow: 0 0 5px 1px #bd2130;
+              }
+            }
           }
         }
       }

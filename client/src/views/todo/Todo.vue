@@ -1,5 +1,5 @@
 <template>
-    <WidgetTodoForm />
+  <WidgetTodoForm />
 </template>
 
 <script>
@@ -19,7 +19,7 @@
 <style lang="less">
   // .tasks__list {
   //   ul {
-      // max-width: 40%;
+  // max-width: 40%;
   //   }
   // }
 </style>

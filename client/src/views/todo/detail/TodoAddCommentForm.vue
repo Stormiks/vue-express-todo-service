@@ -4,7 +4,7 @@
       <label :for="`task-form-${todoId}`">Добавить комментарий:</label>
       <textarea
         v-model.trim="formInputComment"
-				@keydown.enter.stop="addComment"
+        @keydown.enter.stop="addComment"
         :name="`task-${todoId}-comment`"
         :id="`task-form-${todoId}`"
       ></textarea>
@@ -28,21 +28,21 @@
     },
     methods: {
       addComment() {
-				if (this.formInputComment !== '')
-					this.$store
-						.dispatch('addComment', {
-							taskId: Number(this.todoId),
-							text: this.formInputComment,
-						})
-						.then(data => {
-							this.$notify({
-								group: 'private',
-								type: 'success',
-								title: data.author,
-								text: `${data.text}: ${data.msg}`,
-							})
-							this.formInputComment = ''
-						})
+        if (this.formInputComment !== '')
+          this.$store
+            .dispatch('addComment', {
+              taskId: Number(this.todoId),
+              text: this.formInputComment,
+            })
+            .then(data => {
+              this.$notify({
+                group: 'private',
+                type: 'success',
+                title: data.author,
+                text: `${data.text}: ${data.msg}`,
+              })
+              this.formInputComment = ''
+            })
       },
     },
   }
