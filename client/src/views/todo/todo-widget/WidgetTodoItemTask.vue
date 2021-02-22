@@ -15,16 +15,16 @@
             >
               {{ task.title }}
             </router-link>
-            <input
-              class="task__title--create"
-              :ref="`inputTextCreate${this.index}`"
-              :key="`input-${index}`"
-              v-show="isEditTask"
-              type="text"
-              v-model.trim="textTask"
-              @keyup.enter="createTask"
-            />
           </span>
+          <input
+            class="task__title--create"
+            :ref="`inputTextCreate${this.index}`"
+            :key="`input-${index}`"
+            v-show="isEditTask"
+            type="text"
+            v-model.trim="textTask"
+            @keyup.enter="createTask"
+          />
         </transition-group>
 
         <div class="task__footer">
