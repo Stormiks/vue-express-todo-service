@@ -1,4 +1,5 @@
-const { task, user } = require('../db/models/');
+const { task, user, comment } = require('../db/models/');
+const sequelize = require('sequelize');
 
 
 module.exports.updateTask = (req, res) => {
@@ -25,7 +26,17 @@ module.exports.findTasks = (req, res) => {
 		where: {
 			userId: Number(req.query.userId)
 		},
-		attributes: ['id', 'title', 'checked', 'createdAt', 'text']
+		include: [
+			{
+				model: comment,
+				attributes: []
+			}
+		],
+		group: [sequelize.col('taskId')],
+		attributes: [
+			'id', 'title', 'checked', 'createdAt', 'text',
+			[sequelize.fn('COUNT', sequelize.col('taskId')), 'countComments']
+		]
 	}).then(tasks => {
 		res.status(200).send({
 			msg: 'Success!',
