@@ -1,25 +1,36 @@
 <template>
   <ul>
     <todo-comment
-      v-for="comment in comments"
+      v-for="comment in comments(taskId)"
       :key="`task-${comment.taskId}-comment-${comment.id}`"
-      :comment="comment"
+			:id="comment.id"
+			:author="comment.user"
+			:text="comment.text"
+			:created-at="comment.createdAt"
     ></todo-comment>
   </ul>
 </template>
 
 <script>
   import TodoComment from './TodoComment'
-  import { mapState } from 'vuex'
+  import { mapState, mapGetters } from 'vuex'
 
   export default {
     name: 'TodoComments',
+		props: {
+			taskId: {
+				type: [String, Number],
+				required: true
+			}
+		},
     components: {
       TodoComment,
     },
-    computed: mapState({
-      comments: state => state.taskComments.commentsTask,
-    }),
+    computed: {
+			...mapGetters({
+				comments: 'getComments',
+			})
+		}
   }
 </script>
 

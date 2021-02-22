@@ -5,12 +5,12 @@
       <strong>Заметка к задаче: </strong>
       {{ task.text }}
     </p>
-    <div class="task__comments_wrapper" :class="{ 'wrappper_border-top': countCommentsInTask }">
-      <todo-comments v-if="countCommentsInTask"></todo-comments>
+    <div class="task__comments_wrapper" :class="{ 'wrappper_border-top': countComments }">
+      <TodoComments :task-id="id" v-if="countComments" />
 
       <p v-else><strong>Комментариев к задаче нету</strong></p>
       <div class="task__comments_input-box">
-        <todo-add-comment-form></todo-add-comment-form>
+        <TodoAddCommentForm />
       </div>
     </div>
     <router-link :to="{ name: 'todo' }">К списку задач</router-link>
@@ -25,7 +25,10 @@
   export default {
     name: 'TodoDetail',
     props: {
-      id: [String, Number],
+      id: {
+				type: [String, Number],
+				required: true
+			},
     },
     components: {
       TodoComments,
@@ -37,19 +40,16 @@
       }
     },
     computed: {
-      ...mapGetters(['countCommentsInTask']),
-      todoDetail() {
-        return this.$store.state.task.tasks.filter(t => t.id === Number(this.id))
-      },
+      ...mapGetters({
+				countComments: 'countCommentsInTask'
+			})
     },
     created() {
       this.$store.dispatch('fetchDetailInfoTask', Number(this.id)).then(data => {
         this.task = data
       })
-    },
-    mounted() {
       this.$store.dispatch('fetchTaskComments', Number(this.id))
-    },
+    }
   }
 </script>
 

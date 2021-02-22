@@ -1,23 +1,24 @@
 /* eslint-disable no-empty-pattern */
+import Vue from 'vue'
 import taskComments from './../../api/taskComments'
 
 export default {
 	state: {
-		commentsTask: []
+		commentsTask: {}
 	},
 	mutations: {
-		SET_COMMENTS_TO_OPEN_TASK(state, comments) {
-			state.commentsTask = comments
+		SET_COMMENTS_TO_OPEN_TASK(state, { taskId, comments }) {
+			Vue.set(state.commentsTask, taskId, comments)
 		},
-		PUSH_COMMENT_TO_OPEN_TASK(state, newComment) {
-			state.commentsTask.push(newComment)
+		PUSH_COMMENT_TO_OPEN_TASK(state, { taskId, comment }) {
+			state.commentsTask[taskId].push(comment)
 		}
 	},
 	actions: {
 		fetchTaskComments({ commit }, taskId) {
 			taskComments.getTaskComments(taskId).then(res => {
 				if (res.data) {
-					commit('SET_COMMENTS_TO_OPEN_TASK', res.data.comments)
+					commit('SET_COMMENTS_TO_OPEN_TASK', { taskId, comments: res.data.comments })
 				}
 			}).catch(err => console.error(err))
 		},
@@ -30,7 +31,8 @@ export default {
 			try {
 				const res = await taskComments.postComment(comment)
 				const commentData = res.data.comment
-				commit('PUSH_COMMENT_TO_OPEN_TASK', commentData)
+				await commit('PUSH_COMMENT_TO_OPEN_TASK', { taskId: comment.taskId, comment: commentData })
+
 				return {
 					msg: res.data.message,
 					text: commentData.text,
@@ -42,8 +44,12 @@ export default {
 		}
 	},
 	getters: {
-		countCommentsInTask(state) {
-			return state.commentsTask.length
-		}
+		countCommentsInTask (state) {
+			return Object.keys(state.commentsTask).length
+		},
+		getComments: (state => taskId => {
+			// https://eslint.org/docs/rules/no-prototype-builtins
+			return Object.prototype.hasOwnProperty.call(state.commentsTask, taskId) ? state.commentsTask[taskId] : []
+		})
 	}
 }

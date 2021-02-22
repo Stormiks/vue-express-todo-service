@@ -72,5 +72,8 @@ export default {
 		}
   },
   getters: {
+		getTasks: (state => id => {
+			return state.tasks.filter(t => t.id === Number(id))
+		})
   }
 }

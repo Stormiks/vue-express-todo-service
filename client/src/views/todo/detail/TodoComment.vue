@@ -1,7 +1,7 @@
 <template>
   <li>
-    <strong>{{ comment.user.login }}:</strong>
-    <span>{{ comment.text }}</span>
+    <strong>{{ author.login }}:</strong>
+    <span>{{ text }}</span>
     <time>{{ convertDateCreated }}</time>
   </li>
 </template>
@@ -12,13 +12,23 @@
   export default {
     name: 'TodoComment',
     props: {
-      comment: {
-        type: Object,
-      },
+			id: {
+				type: [String, Number],
+				required: true
+			},
+			author: [Object],
+			text: {
+				type: String,
+				default: ''
+			},
+			createdAt: {
+				type: String,
+				default: ''
+			},
     },
     computed: {
       convertDateCreated() {
-        return moment(this.comment.createdAt).format('YYYY-MM-DD HH:mm')
+        return moment(this.createdAt).format('YYYY-MM-DD HH:mm')
       },
     },
   }
