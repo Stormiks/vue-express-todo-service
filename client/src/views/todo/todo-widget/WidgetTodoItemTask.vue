@@ -58,6 +58,9 @@
 					>
 						<SvgIcon :name="'article'" :class="{ 'active': expanded }"/>
 					</i>
+					<i class="icon">
+						<SvgIcon :name="'comments-todo'" :class="{ 'active': expanded }"/>
+					</i>
 				</div>
 			</div>
 		</div>
@@ -222,13 +225,26 @@ export default {
   }
 
   .icon-group {
+		display: flex;
+
     .icon {
       display: block;
       height: 20px;
 
+			+ .icon {
+				margin-left: .3em;
+			}
+
       &:hover {
         cursor: pointer;
       }
+
+
+			.icon__count {
+				font-size: 1rem;
+				padding-left: .2em;
+				padding-right: .2em;
+			}
 
       svg {
         vertical-align: unset;
