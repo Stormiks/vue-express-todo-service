@@ -1,5 +1,5 @@
-<template lang="pug">
-    WidgetTodoForm
+<template>
+    <WidgetTodoForm />
 </template>
 
 <script>
@@ -17,9 +17,9 @@
 </script>
 
 <style lang="less">
-  .tasks__list {
-    ul {
+  // .tasks__list {
+  //   ul {
       // max-width: 40%;
-    }
-  }
+  //   }
+  // }
 </style>

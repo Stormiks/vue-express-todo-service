@@ -1,14 +1,19 @@
-<template lang="pug">
-  div.layout.layout-default
-    header.d-flex.justify-content-between.navbar
-      HeaderLogo
-      div.d-flex.align-items-center.profile__bar
-        HeaderUserBar
-        HeaderUserMenu
-    main
-      router-view
-    footer
-      FooterAuthor
+<template>
+  <div class="layout layout-default">
+    <header class="d-flex justify-content-between navbar">
+      <HeaderLogo />
+      <div class="d-flex align-items-center profile__bar">
+        <HeaderUserBar />
+        <HeaderUserMenu />
+			</div>
+		</header>
+    <main>
+      <router-view />
+		</main>
+    <footer>
+      <FooterAuthor />
+		</footer>
+	</div>
 </template>
 
 <script>
