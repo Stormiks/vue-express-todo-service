@@ -1,66 +1,94 @@
-<template lang="pug">
-  li(
-    :class="{ 'check': task.checked }"
-  )
-    .task__wrapper(:class="{ 'task__dropdown--open': expanded }")
-      label(
-        :class="`task-label-checkbox-${index}`",
-        :for="`task-${task.id}`",
-        @click="changeChecked"
-      )
-        input(
-          :id="`task-${task.id}`",
-          type="checkbox",
-          :checked="task.checked",
-        )
+<template>
+<li :class="{ 'check': task.checked }">
+	<div
+		class="task__wrapper"
+		:class="{ 'task__dropdown--open': expanded }"
+	>
+		<label
+			:class="`task-label-checkbox-${index}`"
+			:for="`task-${task.id}`"
+			@click="changeChecked"
+		>
+			<input
+				:id="`task-${task.id}`"
+				type="checkbox"
+				:checked="task.checked"
+			>
+		</label>
+		<div class="task__title-wrapper">
+			<transition-group
+				name="bounceInRight"
+			>
+				<span class="task__title"
+					:key="`span-${index}`"
+					v-show="!isEditTask"
+				>
+					<router-link
+						:to="{
+							name: 'todo-detail',
+							params: { id: task.id }
+						}"
+					>
+						{{ task.title }}
+					</router-link>
+					<input
+						class="task__title--create"
+						:ref="`inputTextCreate${this.index}`"
+						:key="`input-${index}`"
+						v-show="isEditTask"
+						type="text"
+						v-model.trim="textTask"
+						@keyup.enter="createTask"
+					>
+				</span>
+			</transition-group>
 
-      .task__title-wrapper
-        transition-group(
-          name="bounceInRight"
-        )
-          span.task__title(
-            :key="`span-${index}`",
-            v-show="!isEditTask"
-          ) 
-            router-link(
-              :to="{ name: 'todo-detail', params: { id: task.id } }"
-            ) {{ task.title }}
-
-          input.task__title--create(
-            :ref="`inputTextCreate${this.index}`"
-            :key="`input-${index}`",
-            v-show="isEditTask",
-            type="text",
-            v-model.trim="textTask"
-            @keyup.enter="createTask"
-          )
-
-        div.task__footer
-          span.task__time-add(
-            v-if="task.createdAt"
-          ) Создан: {{ convertDateCreated(task.createdAt) }}
-          .icon-group
-            i.icon(v-if="task.text"
-              @click="expanded = !expanded"
-            )
-              WidgetTodoItemTaskDescIcon(:class="{ 'active': expanded }")
-        
-
-      .btn__group
-        button.btn.btn-primary.btn--task-remove(
-          type="button",
-          @click="createTask"
-        )
-          WidgetTodoItemIconBtnCreate
-
-        button.btn.btn-danger.btn--task-remove(
-          type="button",
-          @click="removeTask(index)"
-        )
-          WidgetTodoItemIconBtnRemove
-    TransitionExpand
-      .task__dropdown.open(v-show="expanded")
-        div Описание: {{ task.text }}
+			<div class="task__footer">
+				<span
+					class="task__time-add"
+					v-if="task.createdAt"
+				>
+					Создан: {{ convertDateCreated(task.createdAt) }}
+				</span>
+				<div class="icon-group">
+					<i
+						class="icon"
+						v-if="task.text"
+						@click="expanded = !expanded"
+					>
+						<WidgetTodoItemTaskDescIcon :class="{ 'active': expanded }"/>
+					</i>
+				</div>
+			</div>
+		</div>
+		<div class="btn__group">
+			<button
+				class="btn btn-primary btn--task-remove"
+				type="button"
+				@click="createTask"
+			>
+				<WidgetTodoItemIconBtnCreate/>
+			</button>
+			<button
+				class="btn btn-danger btn--task-remove"
+				type="button"
+				@click="removeTask(index)"
+			>
+				<WidgetTodoItemIconBtnRemove/>
+			</button>
+		</div>
+	</div>
+	<TransitionExpand>
+		<div
+			class="task__dropdown open"
+			v-show="expanded"
+		>
+			<div>
+				Описание: {{ task.text }}
+			</div>
+		</div>
+	</TransitionExpand>
+</li>
 </template>
 
 <script>
@@ -78,7 +106,7 @@ export default {
       type: Function
     }
   },
-  data () {
+  data() {
     return {
       expanded: false,
       isEditTask: false,
@@ -97,12 +125,12 @@ export default {
     }
   },
   watch: {
-    textTask: function (newText) {
+    textTask(newText) {
       if (this.isEditTask && newText !== '' && this.task.title !== newText) {
         // console.log('eventChangeTaskText', newText);
       }
     },
-    isEditTask: function (newBoolean) {
+    isEditTask(newBoolean) {
       if (!newBoolean) {
         this.$emit('event-change-task-text', {
           index: this.index,
@@ -112,10 +140,10 @@ export default {
     }
   },
   methods: {
-    convertDateCreated (date) {
+    convertDateCreated(date) {
       return moment(date).format('YYYY-MM-DD HH:mm')
     },
-    changeChecked () {
+    changeChecked() {
       const checked = !this.task.checked
 
       this.$emit('event-change-checked', {
@@ -123,7 +151,7 @@ export default {
         checked
       })
     },
-    createTask () {
+    createTask() {
       this.isEditTask = !this.isEditTask
 
       this.$nextTick(() => {
@@ -219,7 +247,7 @@ export default {
       margin-left: 5px;
     }
   }
-  
+
   .task__wrapper {
     display: flex;
     flex-grow: 1;
