@@ -1,26 +1,45 @@
-<template lang="pug">
-  section.profile
-    h1 Страница профиля
-    
-    .container.d-flex.flex-row
-      .form-group.pr-3
-        .input-group
-          label Аватар:
-          input(type="file", ref="imageAvatar" @change="changeAvatar")
+<template>
+  <section class="profile">
+    <h1>Страница профиля</h1>
 
-        .input-group
-          label Аватар: 
-          img(:src="profile.avatar")
+    <div class="container d-flex flex-row">
+      <div class="form-group pr-3">
+        <div class="input-group">
+          <label>
+            Аватар:
+          </label>
+          <input type="file" ref="imageAvatar" @change="changeAvatar">
+        </div>
 
-      .form-group.pl-3
-        .input-group
-          label ID: {{ profile.id }}
+        <div class="input-group">
+          <label>
+            Аватар:
+          </label>
+          <img :src="profile.avatar">
+        </div>
+      </div>
 
-        .input-group
-          label Логин: {{ profile.login }}
+      <div class="form-group pl-3">
+        <div class="input-group">
+          <label>
+            ID: {{ profile.id }}
+          </label>
+        </div>
 
-        .input-group
-          label Имя: {{ profile.name }}
+        <div class="input-group">
+          <label>
+            Логин: {{ profile.login }}
+          </label>
+        </div>
+
+        <div class="input-group">
+          <label>
+            Имя: {{ profile.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

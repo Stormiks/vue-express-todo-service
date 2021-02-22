@@ -1,10 +1,12 @@
-<template lang="pug">
-  div#app
-    component(:is="layout")
-      router-view
+<template>
+  <div id="app">
+    <component :is="layout">
+      <router-view></router-view>
+		</component>
 
-    notifications(position="bottom right", group="auth")
-    notifications(position="bottom right", group="private")
+    <notifications position="bottom right" group="auth" />
+    <notifications position="bottom right" group="private" />
+	</div>
 </template>
 
 <script>
