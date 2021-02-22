@@ -26,39 +26,41 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+  import { mapState } from 'vuex'
 
-export default {
-  name: 'register',
-  data () {
-    return {
-      login: '',
-      pass: '',
-      passConfirm: ''
-    }
-  },
-  computed: mapState({
-    userLogin: state => state.user.profile.login
-  }),
-  methods: {
-    register () {
-      this.$store.dispatch('authRegister', {
-        login: this.login,
-        password: this.pass,
-        passwordConfirm: this.passConfirm
-      }).then(ctx => {
-        if (ctx.msg) {
-          this.$notify({
-            group: 'auth',
-            type: 'success',
-            title: 'Регистрация',
-            text: `Новый пользователь "${ctx.login}" успешно зарегестировался!`
-          });
+  export default {
+    name: 'register',
+    data() {
+      return {
+        login: '',
+        pass: '',
+        passConfirm: '',
+      }
+    },
+    computed: mapState({
+      userLogin: state => state.user.profile.login,
+    }),
+    methods: {
+      register() {
+        this.$store
+          .dispatch('authRegister', {
+            login: this.login,
+            password: this.pass,
+            passwordConfirm: this.passConfirm,
+          })
+          .then(ctx => {
+            if (ctx.msg) {
+              this.$notify({
+                group: 'auth',
+                type: 'success',
+                title: 'Регистрация',
+                text: `Новый пользователь "${ctx.login}" успешно зарегестировался!`,
+              })
 
-          this.$router.push({ name: 'todo', params: { userlogin: this.userLogin }});
-        }
-      })
-    }
+              this.$router.push({ name: 'todo', params: { userlogin: this.userLogin } })
+            }
+          })
+      },
+    },
   }
-}
 </script>

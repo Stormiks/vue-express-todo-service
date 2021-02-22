@@ -12,20 +12,20 @@
 </template>
 
 <script>
-import HeaderLogo from '@/components/HeaderLogo'
-import HeaderUserBar from '@/components/HeaderUserBar'
-import HeaderUserMenu from '@/components/HeaderUserMenu'
-import FooterAuthor from '@/components/FooterAuthor'
+  import HeaderLogo from '@/components/HeaderLogo'
+  import HeaderUserBar from '@/components/HeaderUserBar'
+  import HeaderUserMenu from '@/components/HeaderUserMenu'
+  import FooterAuthor from '@/components/FooterAuthor'
 
-export default {
-  name: 'DefaultLayout',
-  components: {
-    HeaderLogo,
-    HeaderUserBar,
-    HeaderUserMenu,
-    FooterAuthor
-  },
-}
+  export default {
+    name: 'DefaultLayout',
+    components: {
+      HeaderLogo,
+      HeaderUserBar,
+      HeaderUserMenu,
+      FooterAuthor,
+    },
+  }
 </script>
 
 <style lang="less">

@@ -42,91 +42,91 @@
 </template>
 
 <script>
-import WidgetTodoFieldAddTask from "./WidgetTodoFieldAddTask";
-import WidgetTodoItemTask from "./WidgetTodoItemTask";
+  import WidgetTodoFieldAddTask from './WidgetTodoFieldAddTask'
+  import WidgetTodoItemTask from './WidgetTodoItemTask'
 
-import { mapState, mapActions } from "vuex";
+  import { mapState, mapActions } from 'vuex'
 
-export default {
-  components: {
-    WidgetTodoFieldAddTask,
-    WidgetTodoItemTask,
-  },
-  data () {
-    return {
-      tasks: [],
-      isFilterCompleted: false
-    }
-  },
-  async mounted () {
-    await this.fetchTasks()
-    this.tasks = this.stateTasks
-  },
-  computed: {
-    ...mapState({
-      stateTasks: state => state.task.tasks
-    }),
-    countCompleted () {
-      return this.stateTasks.filter(t => t.checked).length
-    }
-  },
-  watch: {
-    isFilterCompleted (newBool) {
-      if (newBool) this.tasks = this.stateTasks.filter(t => t.checked === newBool)
-      else this.tasks = this.stateTasks
-    }
-  },
-  methods: {
-    ...mapActions({
-      fetchTasks: 'fetchTaskAll',
-      addTask: 'taskAdd',
-      removeTask: 'taskDelete',
-      changeTask: 'taskChange',
-    }),
-    onAddTask (event) {
-      this.addTask(event).then(res => {
-        this.$notify({
-          group: 'private',
-          type: 'success',
-          title: 'Новая задача',
-          text: `${res.msg} Новая задача "<b>${res.task.title}</b>" успешно добавлена`
-        });
-      })
+  export default {
+    components: {
+      WidgetTodoFieldAddTask,
+      WidgetTodoItemTask,
     },
-    onChangeChecked (eTask) {
-      this.$set(this.tasks[eTask.index], 'checked', eTask.checked)
-
-      this.changeTask(this.tasks[eTask.index])
-    },
-    onRemoveTask (index) {
-      this.removeTask({ 
-        index,
-        task: this.stateTasks[index]
-      }).then(res => {
-        if (res.error) return
-
-        this.$notify({
-          group: 'private',
-          type: 'success',
-          title: 'Удаление задачи',
-          text: `Задача "<b>${res}</b>" успешно удалена!`
-        });
-      })
-    },
-    saveTodo () {
-      this.$store.dispatch('taskAdd', this.tasks).then(ctx => {
-        console.log(ctx);
-      })
-    },
-    onChangeTaskText (eTask) {
-      if (this.tasks[eTask.index].title !== eTask.title) {
-        this.$set(this.tasks[eTask.index], 'title', eTask.title)
-  
-        this.changeTask(this.tasks[eTask.index])
+    data() {
+      return {
+        tasks: [],
+        isFilterCompleted: false,
       }
-    }
+    },
+    async mounted() {
+      await this.fetchTasks()
+      this.tasks = this.stateTasks
+    },
+    computed: {
+      ...mapState({
+        stateTasks: state => state.task.tasks,
+      }),
+      countCompleted() {
+        return this.stateTasks.filter(t => t.checked).length
+      },
+    },
+    watch: {
+      isFilterCompleted(newBool) {
+        if (newBool) this.tasks = this.stateTasks.filter(t => t.checked === newBool)
+        else this.tasks = this.stateTasks
+      },
+    },
+    methods: {
+      ...mapActions({
+        fetchTasks: 'fetchTaskAll',
+        addTask: 'taskAdd',
+        removeTask: 'taskDelete',
+        changeTask: 'taskChange',
+      }),
+      onAddTask(event) {
+        this.addTask(event).then(res => {
+          this.$notify({
+            group: 'private',
+            type: 'success',
+            title: 'Новая задача',
+            text: `${res.msg} Новая задача "<b>${res.task.title}</b>" успешно добавлена`,
+          })
+        })
+      },
+      onChangeChecked(eTask) {
+        this.$set(this.tasks[eTask.index], 'checked', eTask.checked)
+
+        this.changeTask(this.tasks[eTask.index])
+      },
+      onRemoveTask(index) {
+        this.removeTask({
+          index,
+          task: this.stateTasks[index],
+        }).then(res => {
+          if (res.error) return
+
+          this.$notify({
+            group: 'private',
+            type: 'success',
+            title: 'Удаление задачи',
+            text: `Задача "<b>${res}</b>" успешно удалена!`,
+          })
+        })
+      },
+      saveTodo() {
+        this.$store.dispatch('taskAdd', this.tasks).then(ctx => {
+          console.log(ctx)
+        })
+      },
+      onChangeTaskText(eTask) {
+        if (this.tasks[eTask.index].title !== eTask.title) {
+          this.$set(this.tasks[eTask.index], 'title', eTask.title)
+
+          this.changeTask(this.tasks[eTask.index])
+        }
+      },
+    },
   }
-}
 </script>
 
 <style lang="less">
@@ -146,11 +146,11 @@ export default {
         justify-content: center;
         align-items: center;
       }
-  
+
       flex-grow: 1;
       padding-left: 0;
       list-style: none;
-  
+
       li {
         margin-top: 7px;
         margin-bottom: 7px;
@@ -182,11 +182,11 @@ export default {
   .filter {
     &__label {
       border-right: 1px solid #000;
-      padding: .2em .5em;
+      padding: 0.2em 0.5em;
     }
 
     &__params {
-      padding: .2em .5em;
+      padding: 0.2em 0.5em;
 
       &__input {
         * {
@@ -197,7 +197,7 @@ export default {
 
         input {
           + label {
-            margin-left: .4em;
+            margin-left: 0.4em;
           }
         }
 

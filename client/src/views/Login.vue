@@ -30,68 +30,70 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+  import { mapState } from 'vuex'
 
-export default {
-  name: 'login',
-  data () {
-    return {
-      login: 'Skylinker',
-      pass: '123456',
-      loginError: false
-    }
-  },
-  computed: {
-    ...mapState({
-      userLogin: state => state.user.profile.login
-    }),
-    validPassword () {
-      return this.pass.length >= 6
+  export default {
+    name: 'login',
+    data() {
+      return {
+        login: 'Skylinker',
+        pass: '123456',
+        loginError: false,
+      }
     },
-    validLogin () {
-      return this.login.length > 0
+    computed: {
+      ...mapState({
+        userLogin: state => state.user.profile.login,
+      }),
+      validPassword() {
+        return this.pass.length >= 6
+      },
+      validLogin() {
+        return this.login.length > 0
+      },
+      validationForm() {
+        return this.validLogin && this.validPassword
+      },
     },
-    validationForm () {
-      return this.validLogin && this.validPassword
-    }
-  },
-  methods: {
-    logged () {
-      if (!this.validationForm) return this.loginError = true
+    methods: {
+      logged() {
+        if (!this.validationForm) return (this.loginError = true)
 
-      this.$store.dispatch('authLogin', {
-        login: this.login,
-        password: this.pass
-      }).then(ctx => {
-        if (ctx.msg) {
-          this.$notify({
-            group: 'auth',
-            type: 'success',
-            title: 'Вход',
-            text: `Пользователь "${ctx.login}" успешно вошел в личный кабинет!`
-          });
+        this.$store
+          .dispatch('authLogin', {
+            login: this.login,
+            password: this.pass,
+          })
+          .then(ctx => {
+            if (ctx.msg) {
+              this.$notify({
+                group: 'auth',
+                type: 'success',
+                title: 'Вход',
+                text: `Пользователь "${ctx.login}" успешно вошел в личный кабинет!`,
+              })
 
-          if (this.userLogin) this.loginError = false;
+              if (this.userLogin) this.loginError = false
 
-          this.$router.push({ name: 'todo', params: { userlogin: this.userLogin }});
-        } else if (ctx.error) {
-          this.loginError = true;
+              this.$router.push({ name: 'todo', params: { userlogin: this.userLogin } })
+            } else if (ctx.error) {
+              this.loginError = true
 
-          this.$notify({
-            group: 'auth',
-            type: 'error',
-            title: 'Login',
-            text: `${ctx.error}: ${ctx.trace.message}`
-          });
-        }
-      });
-    }
+              this.$notify({
+                group: 'auth',
+                type: 'error',
+                title: 'Login',
+                text: `${ctx.error}: ${ctx.trace.message}`,
+              })
+            }
+          })
+      },
+    },
   }
-}
 </script>
 
 <style lang="less" scoped>
-.error {
-  border-color: red;
-}
+  .error {
+    border-color: red;
+  }
 </style>

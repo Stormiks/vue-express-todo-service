@@ -8,11 +8,11 @@
 </template>
 
 <script>
-export default {
-  computed: {
-    layout () {
-      return this.$route.meta.layout
-    }
+  export default {
+    computed: {
+      layout() {
+        return this.$route.meta.layout
+      },
+    },
   }
-}
 </script>

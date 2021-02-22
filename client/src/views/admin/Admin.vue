@@ -11,21 +11,21 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+  import { mapActions } from 'vuex'
 
-export default {
-  data () {
-    return {
-      countUsers: ''
-    }
-  },
-  created() {
-    this.fetchUsers().then(res => this.countUsers = res.length);
-  },
-  methods: {
-    ...mapActions({
-      fetchUsers: 'getAllUsers'
-    })
+  export default {
+    data() {
+      return {
+        countUsers: '',
+      }
+    },
+    created() {
+      this.fetchUsers().then(res => (this.countUsers = res.length))
+    },
+    methods: {
+      ...mapActions({
+        fetchUsers: 'getAllUsers',
+      }),
+    },
   }
-}
 </script>

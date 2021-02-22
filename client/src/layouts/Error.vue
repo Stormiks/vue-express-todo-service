@@ -3,7 +3,7 @@
 </template>
 
 <script>
-export default {
-  name: 'ErrorLayout'
-}
+  export default {
+    name: 'ErrorLayout',
+  }
 </script>

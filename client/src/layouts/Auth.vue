@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import Register from './../views/Register'
-import Login from './../views/Login'
+  import Register from './../views/Register'
+  import Login from './../views/Login'
 
-export default {
-  name: 'AuthLayout',
-  components: { Register, Login }
-}
+  export default {
+    name: 'AuthLayout',
+    components: { Register, Login },
+  }
 </script>
 
 <style lang="less">
@@ -45,7 +45,7 @@ export default {
           }
         }
 
-        button[type="submit"] {
+        button[type='submit'] {
           display: block;
           box-shadow: 0 10px 14px -7px #539fa5;
           background: linear-gradient(to bottom, #55aeb6 5%, #548e93 100%);
@@ -61,7 +61,7 @@ export default {
           margin-right: auto;
           text-decoration: none;
           text-shadow: 0 1px 0 #5b8a3c;
-          transition: all .13s;
+          transition: all 0.13s;
 
           &:hover {
             background: linear-gradient(to bottom, #538e93 5%, #55aeb6 100%);
@@ -101,7 +101,7 @@ export default {
         p {
           text-align: center;
 
-          span:only-of-type  {
+          span:only-of-type {
             margin-right: 5px;
           }
         }

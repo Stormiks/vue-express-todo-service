@@ -36,50 +36,50 @@ form
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      task: '',
-      description: '',
-      descLimitSymbols: 255
-    }
-  },
-  computed: {
-    isValidNewTask () {
-      return this.task !== ''
+  export default {
+    data() {
+      return {
+        task: '',
+        description: '',
+        descLimitSymbols: 255,
+      }
     },
-    warnTextValid () {
-      return this.task === '' ? 'Введите текст задачи' : ''
+    computed: {
+      isValidNewTask() {
+        return this.task !== ''
+      },
+      warnTextValid() {
+        return this.task === '' ? 'Введите текст задачи' : ''
+      },
+      isValidDescLength() {
+        return this.descLengthSymbols === this.descLimitSymbols
+      },
+      descLengthSymbols() {
+        return this.description.length
+      },
     },
-    isValidDescLength () {
-      return this.descLengthSymbols === this.descLimitSymbols
+    watch: {
+      description(newValue, oldValue) {
+        if (this.descLengthSymbols > this.descLimitSymbols) this.description = oldValue
+      },
     },
-    descLengthSymbols () {
-      return this.description.length
-    }
-  },
-  watch: {
-    description (newValue, oldValue) {
-      if (this.descLengthSymbols > this.descLimitSymbols) this.description = oldValue
-    }
-  },
-  methods: {
-    addTask (e) {
-      if (!this.isValidNewTask) return
+    methods: {
+      addTask(e) {
+        if (!this.isValidNewTask) return
 
-      this.$emit('event-new-task', {
-        title: this.task,
-        description: this.description,
-        checked: false
-      })
+        this.$emit('event-new-task', {
+          title: this.task,
+          description: this.description,
+          checked: false,
+        })
 
-      this.clearField()
+        this.clearField()
+      },
+      clearField() {
+        this.task = ''
+      },
     },
-    clearField () {
-      this.task = ''
-    }
   }
-}
 </script>
 
 <style lang="less" scoped>
@@ -97,12 +97,12 @@ export default {
           display: flex;
           justify-content: space-between;
           flex-direction: row-reverse;
-          margin-top: .3em;
+          margin-top: 0.3em;
 
           .desc-length {
             font-size: 13px;
           }
-  
+
           .error {
             color: red;
             font-size: 12px;
@@ -115,8 +115,8 @@ export default {
         width: inherit;
 
         svg {
-          stroke: #4F4F4F;
-          transition: all .13s;
+          stroke: #4f4f4f;
+          transition: all 0.13s;
           height: 20px;
           width: 20px;
         }
@@ -126,17 +126,17 @@ export default {
 
           svg {
             stroke: #000;
-            filter: drop-shadow(0 0 1px rgba(148, 147, 147, .4));
+            filter: drop-shadow(0 0 1px rgba(148, 147, 147, 0.4));
           }
         }
       }
 
       .btn {
         padding: 2px 10px;
-        transition: all .15s;
+        transition: all 0.15s;
 
         &--add-task {
-          transition: all .3s ease-in .1s;
+          transition: all 0.3s ease-in 0.1s;
 
           &:not(.disabled) {
             background-color: #5f9ea0;
@@ -150,7 +150,7 @@ export default {
           position: absolute;
           right: 5px;
           transform: translateX(150%);
-          transition: all .13s .3s;
+          transition: all 0.13s 0.3s;
           padding: 0;
           line-height: 0;
           border: none;

@@ -17,11 +17,11 @@
       <tbody>
         <tr v-for="user in users" :key="`${user.id}-${user.login}`">
           <td>{{ user.id }}</td>
-          <td> 
+          <td>
             <router-link
               :to="{
                 path: `/admin/users/${user.id}`,
-                params: { id: user.id }
+                params: { id: user.id },
               }"
             >
               {{ user.login }}
@@ -37,43 +37,43 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-export default {
-  data() {
-    return {
-      users: []
-    }
-  },
-  created() {
-    this.fetchUsers().then(res => this.users = res)
-  },
-  methods: {
-    ...mapActions({
-      fetchUsers: 'getAllUsers'
-    })
+  import { mapActions } from 'vuex'
+  export default {
+    data() {
+      return {
+        users: [],
+      }
+    },
+    created() {
+      this.fetchUsers().then(res => (this.users = res))
+    },
+    methods: {
+      ...mapActions({
+        fetchUsers: 'getAllUsers',
+      }),
+    },
   }
-}
 </script>
 
 <style lang="less">
-table {
-  width: 100%;
+  table {
+    width: 100%;
 
-  td {
-    border: 1px solid #000;
-  }
-
-  thead {
     td {
-      line-height: 1;
-      padding: 5px;
+      border: 1px solid #000;
+    }
+
+    thead {
+      td {
+        line-height: 1;
+        padding: 5px;
+      }
+    }
+
+    tbody {
+      td {
+        padding: 3px 5px;
+      }
     }
   }
-
-  tbody {
-    td {
-      padding: 3px 5px;
-    }
-  }
-}
 </style>
