@@ -56,7 +56,7 @@
 						v-if="task.text"
 						@click="expanded = !expanded"
 					>
-						<WidgetTodoItemTaskDescIcon :class="{ 'active': expanded }"/>
+						<SvgIcon :name="'article'" :class="{ 'active': expanded }"/>
 					</i>
 				</div>
 			</div>
@@ -67,14 +67,14 @@
 				type="button"
 				@click="createTask"
 			>
-				<WidgetTodoItemIconBtnCreate/>
+				<SvgIcon :name="'pencil'"/>
 			</button>
 			<button
 				class="btn btn-danger btn--task-remove"
 				type="button"
 				@click="removeTask(index)"
 			>
-				<WidgetTodoItemIconBtnRemove/>
+				<SvgIcon :name="'basket'"/>
 			</button>
 		</div>
 	</div>
@@ -92,11 +92,9 @@
 </template>
 
 <script>
-import WidgetTodoItemIconBtnCreate from "./WidgetTodoItemIconBtnCreate"
-import WidgetTodoItemIconBtnRemove from "./WidgetTodoItemIconBtnRemove"
-import WidgetTodoItemTaskDescIcon from "./WidgetTodoItemTaskDescIcon"
 import TransitionExpand from "@/components/TransitionExpand"
 import moment from 'moment'
+import SvgIcon from '@/components/SvgIcon'
 
 export default {
   props: {
@@ -114,10 +112,8 @@ export default {
     }
   },
   components: {
-    WidgetTodoItemIconBtnCreate,
-    WidgetTodoItemIconBtnRemove,
-    WidgetTodoItemTaskDescIcon,
-    TransitionExpand
+    TransitionExpand,
+    SvgIcon
   },
   computed: {
     isDescription() {
