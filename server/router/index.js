@@ -30,6 +30,7 @@ module.exports = (app) => {
 	router.post('/todos/add', TaskController.addTask);
 
 	router.get('/todos/comments/:taskId', CommentController.findTaskComments);
+	router.get('/todos/comments/count/:taskId', CommentController.countTaskComments);
 	router.post('/comments/add', CommentController.addComment);
 
 	router.get('/profile/:userId', UserController.profile);

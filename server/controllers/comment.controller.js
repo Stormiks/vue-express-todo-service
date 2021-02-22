@@ -21,6 +21,27 @@ module.exports.findTaskComments = (req, res) => {
 	}));
 };
 
+module.exports.countTaskComments = (req, res) => {
+	comment.count({
+		where: {
+			taskId: Number(req.params.taskId)
+		},
+		distinct: true,
+		include:[{
+			model: task,
+		}],
+		col: 'id'
+	}).then(data => {
+		res.status(200).send({
+			msg: 'Success',
+			taskCommentsCount: data
+		});
+	}).catch(err => res.status(500).send({
+		msg: 'Error!',
+		trace: err
+	}));
+};
+
 module.exports.addComment = (req, res) => {
 	comment.create({
 		userId: req.body.userId,
@@ -39,10 +60,10 @@ module.exports.addComment = (req, res) => {
 					taskId: newComment.taskId,
 					createdAt: newComment.createdAt,
 				}
-			})
-		})
+			});
+		});
 	}).catch(err => res.status(500).send({
 		msg: 'Error!',
 		trace: err
 	}));
-}
+};

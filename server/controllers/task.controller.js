@@ -13,7 +13,7 @@ module.exports.updateTask = (req, res) => {
 		else
 			res.status(404).send({
 				warning: `Not found task ID: ${res.body.id}!`
-			})
+			});
 	}).catch(err => res.status(500).send({
 		msg: 'Error!',
 		trace: err
