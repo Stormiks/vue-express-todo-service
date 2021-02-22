@@ -58,7 +58,8 @@
 					>
 						<SvgIcon :name="'article'" :class="{ 'active': expanded }"/>
 					</i>
-					<i class="icon">
+					<i class="icon icon__text">
+						<span class="icon__count">{{ countComments }}</span>
 						<SvgIcon :name="'comments-todo'" :class="{ 'active': expanded }"/>
 					</i>
 				</div>
@@ -98,6 +99,7 @@
 import TransitionExpand from "@/components/TransitionExpand"
 import moment from 'moment'
 import SvgIcon from '@/components/SvgIcon'
+import { mapActions } from 'vuex'
 
 export default {
   props: {
@@ -111,7 +113,8 @@ export default {
     return {
       expanded: false,
       isEditTask: false,
-      textTask: this.task.title
+      textTask: this.task.title,
+			countComments: 0
     }
   },
   components: {
@@ -123,6 +126,9 @@ export default {
       return (this.task.text !== '' && this.task.text !== null)
     }
   },
+	mounted() {
+		this.fetchCountComments(this.task.id).then(data => this.countComments = data)
+	},
   watch: {
     textTask(newText) {
       if (this.isEditTask && newText !== '' && this.task.title !== newText) {
@@ -139,6 +145,9 @@ export default {
     }
   },
   methods: {
+		...mapActions({
+			fetchCountComments: 'fetchTaskCommentsCount'
+		}),
     convertDateCreated(date) {
       return moment(date).format('YYYY-MM-DD HH:mm')
     },
@@ -239,6 +248,10 @@ export default {
         cursor: pointer;
       }
 
+			&.icon__text {
+				display: flex;
+				align-items: center;
+			}
 
 			.icon__count {
 				font-size: 1rem;

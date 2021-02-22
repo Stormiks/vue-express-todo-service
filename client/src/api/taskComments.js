@@ -4,8 +4,7 @@ import url from './apiUrl'
 
 export default {
   getTaskComments(taskId) {
-    return axios.get(`${url.taskComments}/${taskId}`, {
-    })
+    return axios.get(`${url.taskComments}/${taskId}`)
 	},
 	postComment(comment) {
 		return axios.post(url.commentAdd, {
@@ -13,5 +12,12 @@ export default {
 			userId: comment.userId,
 			text: comment.text
 		})
+	},
+	getCommentCount(taskId) {
+		return axios.get(`${url.taskCommentCount}/${taskId}`)
+		// return axios.get(url.commentCount, {
+		// 	taskId: comment.taskId,
+		// 	userId: comment.userId
+		// })
 	}
 }

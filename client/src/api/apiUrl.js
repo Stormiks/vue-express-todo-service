@@ -17,5 +17,6 @@ export default {
   taskGet: `${baseUrlApi}/todos`,
   taskUpdate: `${baseUrlApi}/todos`,
   taskComments: `${baseUrlApi}/todos/comments`,
+  taskCommentCount: `${baseUrlApi}/todos/comments/count`,
   commentAdd: `${baseUrlApi}/comments/add`
 }

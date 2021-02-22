@@ -22,6 +22,9 @@ export default {
 			})
 			.catch(err => console.error(err))
 		},
+		fetchTaskCommentsCount({}, taskId) {
+			return taskComments.getCommentCount(taskId).then(res => res.data.taskCommentsCount)
+		},
 		addComment({ commit }, comment) {
 			comment.userId = this.state.user.profile.id
 			return taskComments.postComment(comment).then(res => {
