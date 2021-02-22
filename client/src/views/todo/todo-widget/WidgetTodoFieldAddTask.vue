@@ -13,10 +13,10 @@ form
         :class="{ 'transform-visible': isValidNewTask }"
       )
         i.icon.cross-remove
-          svg(viewBox="0 0 26 26", fill="none", xmlns="http://www.w3.org/2000/svg")
-            path(d="M13 25C19.6274 25 25 19.6274 25 13C25 6.37258 19.6274 1 13 1C6.37258 1 1 6.37258 1 13C1 19.6274 6.37258 25 13 25Z", stroke="#4F4F4F", stroke-linecap="round", stroke-miterlimit="10", stroke-width="2")
-            path(d="M 9 9.5 L 16.7 17.2", stroke-lineca="round", stroke-miterlimit="10", stroke-width="2")
-            path(d="M16.7 9.5L9 17.3", stroke-lineca="round", stroke-miterlimit="10", stroke-width="2")
+          svg(viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg")
+            path(d="M13 25C19.6274 25 25 19.6274 25 13C25 6.37258 19.6274 1 13 1C6.37258 1 1 6.37258 1 13C1 19.6274 6.37258 25 13 25Z" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2")
+            path(d="M 9 9.5 L 16.7 17.2" stroke-lineca="round" stroke-miterlimit="10" stroke-width="2")
+            path(d="M16.7 9.5L9 17.3" stroke-lineca="round" stroke-miterlimit="10" stroke-width="2")
     button.btn.btn--add-task(
       type="submit",
       @click.prevent="addTask"
@@ -163,6 +163,21 @@ form
           &.transform-visible {
             transform: translateX(0);
             z-index: 0;
+						outline: none;
+						box-shadow: none;
+
+						svg {
+							stroke: #000;
+							fill: #fff;
+							border-radius: 100%;
+						}
+
+						&:focus {
+							svg {
+								stroke: #bd2130;
+								box-shadow: 0 0 5px 1px #bd2130;
+							}
+						}
           }
         }
       }
