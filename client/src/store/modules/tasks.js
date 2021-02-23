@@ -4,11 +4,15 @@ import tasksApi from './../../api/tasks'
 export default {
   state: {
     tasks: [],
+    tasksActive: [],
     navTasksPage: 0
   },
   mutations: {
     SET_TASKS(state, tasks) {
       state.tasks = tasks
+    },
+    SET_TASKS_ACTIVE(state, tasks) {
+      state.tasksActive = tasks
     },
     ADD_TASK(state, task) {
       state.tasks.unshift({
@@ -63,6 +67,19 @@ export default {
 
         if (tasks.length) {
           commit('SET_TASKS', tasks)
+
+          return tasks
+        }
+
+        return { error: 'Error load data' }
+      }).catch(err => console.error(err))
+		},
+    fetchTaskAllActive ({ commit }) {
+      return tasksApi.getTasksToActive().then(res => {
+        const tasks = res.data.tasks
+
+        if (tasks.length) {
+          commit('SET_TASKS_ACTIVE', tasks)
 
           return tasks
         }

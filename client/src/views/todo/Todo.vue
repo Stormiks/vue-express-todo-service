@@ -10,9 +10,7 @@
     components: {
       WidgetTodoForm,
     },
-    created() {},
     mounted() {},
-    methods: {},
   }
 </script>
 

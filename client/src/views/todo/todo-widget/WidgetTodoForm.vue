@@ -34,11 +34,9 @@
           :index="index"
           @event-change-checked="onChangeChecked"
           @event-change-task-text="onChangeTaskText"
-          :removeTask="onRemoveTask"
+          :remove-task="onRemoveTask"
         )
       p(v-else) Список задач пуст!
-
-    router-view
 </template>
 
 <script>

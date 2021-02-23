@@ -45,6 +45,17 @@ const routes = [
     }
   },
   {
+    path: '/todo/board-active',
+    name: 'todo-board-active',
+    component: () => import('@/views/todo/TodoListActive'),
+    meta: {
+      layout: 'default-layout',
+      middleware: [
+        auth
+      ]
+    }
+  },
+  {
     path: '/todo/:id',
     name: 'todo-detail',
     props: true,
