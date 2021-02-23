@@ -27,6 +27,7 @@ module.exports = (app) => {
 
 	router.patch('/todos', getJWTConfig(), TaskController.updateTask)
 	router.get('/todos', getJWTConfig(), TaskController.findTasks);
+	router.get('/todos/active', getJWTConfig(), TaskController.findTasksToActual);
 	router.get('/todos/:taskId', getJWTConfig(), TaskController.findTask);
 	router.delete('/todos/del/:userId/:taskId', getJWTConfig(), TaskController.deleteTask);
 	router.post('/todos/add', getJWTConfig(), TaskController.addTask);

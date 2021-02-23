@@ -48,6 +48,37 @@ module.exports.findTasks = (req, res) => {
 	}));
 };
 
+module.exports.findTasksToActual = (req, res) => {
+	task.findAll({
+		where: {
+			checked: 0
+		},
+		include: [
+			{
+				model: comment,
+				attributes: []
+			},
+			{
+				model: user,
+				attributes: ['id', 'name', 'login', 'avatar']
+			}
+		],
+		group: [sequelize.col('task.id')],
+		attributes: [
+			'id', 'title', 'createdAt', 'text',
+			[sequelize.fn('COUNT', sequelize.col('comments.taskId')), 'countComments']
+		]
+	}).then(tasks => {
+		res.status(200).send({
+			msg: 'Success!',
+			tasks
+		});
+	}).catch(err => res.status(500).send({
+		msg: 'Error!',
+		trace: err
+	}));
+}
+
 module.exports.findTask = (req, res) => {
 	task.findByPk(req.params.taskId, {
 		attributes: ['id', 'title', 'checked', 'createdAt', 'text']

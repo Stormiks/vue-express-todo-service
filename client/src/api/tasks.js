@@ -15,6 +15,13 @@ export default {
     })
   },
   /**
+   * Get all tasks to active
+   * @returns {Response|Promise}
+   */
+  getTasksToActive () {
+    return axios.get(url.taskGetActive)
+  },
+  /**
    * Get task
    * @param {Number} [taskId]
    * @returns {Response|Promise}
