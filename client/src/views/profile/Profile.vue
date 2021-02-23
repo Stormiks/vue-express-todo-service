@@ -11,7 +11,7 @@
           <input type="file" ref="imageAvatar" @change="changeAvatar">
         </div>
 
-        <div class="input-group">
+        <div class="input-group profile__user_avatar">
           <label>
             Аватар:
           </label>
@@ -46,6 +46,7 @@
   import { mapState, mapActions } from 'vuex'
 
   export default {
+    name: 'Profile',
     props: {
       userId: String,
     },
@@ -78,3 +79,14 @@
     },
   }
 </script>
+
+<style lang="less" scoped>
+.profile {
+  .profile__user_avatar {
+    img {
+      max-height: 300px;
+      max-width: 300px;
+    }
+  }
+}
+</style>
