@@ -32,10 +32,10 @@ module.exports.findTasks = (req, res) => {
 				attributes: []
 			}
 		],
-		group: [sequelize.col('taskId')],
+		group: [sequelize.col('task.id')],
 		attributes: [
 			'id', 'title', 'checked', 'createdAt', 'text',
-			[sequelize.fn('COUNT', sequelize.col('taskId')), 'countComments']
+			[sequelize.fn('COUNT', sequelize.col('comments.taskId')), 'countComments']
 		]
 	}).then(tasks => {
 		res.status(200).send({
