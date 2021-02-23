@@ -1,43 +1,53 @@
-<template lang="pug">
-  section
-    h1 {{ $route.meta.pageTitle }}
-    form.form__auth.form__login
-      h3.form__title Форма входа
-      .form__wrap-inner
-        .form__field
-          label(for="form-reg-login") Логин:
-          input#form-reg-login(
-            :class="{ 'error': loginError && !validLogin }",
-            type="text",
+<template>
+  <section>
+    <h1>{{ $route.meta.pageTitle }}</h1>
+    <form class="form__auth form__login" @submit.prevent.stop="logged">
+      <h3 class="form__title">Форма входа</h3>
+      <div class="form__wrap-inner">
+        <div class="form__field">
+          <label for="form-reg-login">Логин:</label>
+          <input
+            id="form-reg-login"
+            :class="{ 'error': loginError && !validLogin }"
+            type="text"
             v-model.trim="login"
-          )
+          >
+        </div>
 
-        .form__field
-          label(for="form-reg-pass") Пароль:
-          input#form-reg-pass(
-            :class="{ 'error': loginError && !validPassword }",
-            type="password",
+        <div class="form__field">
+          <label for="form-reg-pass">Пароль:</label>
+          <input
+            id="form-reg-pass"
+            :class="{ 'error': loginError && !validPassword }"
+            type="password"
             v-model.trim="pass"
-          )
+          >
+        </div>
+      </div>
 
-      .form__nav
-        button(type="submit", @click.prevent="logged") Войти
+      <div class="form__nav">
+        <button type="submit" @click.prevent.stop="logged">Войти</button>
+      </div>
 
-      .form__footer
-        p
-          span Нет аккаунта?
-          router-link(to="/register") Регистрация
+      <div class="form__footer">
+        <p>
+          <span>Нет аккаунта?</span>
+          <router-link to="/register">Регистрация</router-link>
+        </p>
+      </div>
+    </form>
+  </section>
 </template>
 
 <script>
   import { mapState } from 'vuex'
 
   export default {
-    name: 'login',
+    name: 'Login',
     data() {
       return {
-        login: 'Skylinker',
-        pass: '123456',
+        login: 'Skylinker5',
+        pass: 'oloben64',
         loginError: false,
       }
     },
@@ -73,7 +83,10 @@
 
             if (this.userLogin) this.loginError = false
 
-            this.$router.push({ name: 'todo', params: { userlogin: this.userLogin } })
+            this.$router.push({
+              name: 'todo',
+              params: { userlogin: this.userLogin }
+            })
           } else if (ctx.error) {
             this.loginError = true
 

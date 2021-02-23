@@ -14,7 +14,7 @@ export default new Vuex.Store({
   },
   actions: {
 		clearDataSessions({ state }) {
-			console.log('clearDataSessions', state);
+			// console.log('clearDataSessions', state);
 		}
   },
   getters: {

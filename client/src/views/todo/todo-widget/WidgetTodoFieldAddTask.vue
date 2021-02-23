@@ -143,6 +143,11 @@ form
             color: #fff;
             box-shadow: 0 0 2px 1px #71a7a973, 0 0 5px 0 #0000005c;
           }
+
+          &:focus {
+            background-color: #3d8b8ec7;
+            box-shadow: inset 0 0 15px 1px #0c414687;
+          }
         }
 
         &--clear-field {

@@ -37,7 +37,7 @@
           :removeTask="onRemoveTask"
         )
       p(v-else) Список задач пуст!
-    
+
     router-view
 </template>
 
