@@ -12,6 +12,9 @@ export default {
 		},
 		PUSH_COMMENT_TO_OPEN_TASK(state, { taskId, comment }) {
 			state.commentsTask[taskId].push(comment)
+		},
+		CLEAR_COMMENTS_CACHE(state) {
+			state.commentsTask = {}
 		}
 	},
 	actions: {
@@ -41,6 +44,9 @@ export default {
 			} catch (err) {
 				return console.error(err)
 			}
+		},
+		async clearComments({ commit }) {
+			await commit('CLEAR_COMMENTS_CACHE')
 		}
 	},
 	getters: {

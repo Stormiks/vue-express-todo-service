@@ -141,6 +141,12 @@ router.beforeEach((to, from, next) => {
 
   const middleware = to.meta.middleware
 
+  if (!store.getters.auth) {
+		store.dispatch('clearDataSessions')
+		store.dispatch('clearTasks')
+		store.dispatch('clearComments')
+	}
+
   return middleware[0]({ to, from, next, store })
 })
 

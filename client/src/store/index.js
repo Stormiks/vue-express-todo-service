@@ -13,6 +13,9 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
+		clearDataSessions({ state }) {
+			console.log('clearDataSessions', state);
+		}
   },
   getters: {
     layout (state) {

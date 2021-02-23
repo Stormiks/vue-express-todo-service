@@ -7,10 +7,10 @@ export default {
     navTasksPage: 0
   },
   mutations: {
-    SET_TASKS (state, tasks) {
+    SET_TASKS(state, tasks) {
       state.tasks = tasks
     },
-    ADD_TASK (state, task) {
+    ADD_TASK(state, task) {
       state.tasks.unshift({
         id: task.id,
         title: task.title,
@@ -18,9 +18,13 @@ export default {
         createdAt: task.createdAt
       })
     },
-    REMOVE_TASK (state, task) {
+    REMOVE_TASK(state, task) {
       state.tasks.splice(task, 1)
-    }
+    },
+		CLEAR_TASKS_CACHE(state) {
+			state.tasks = []
+			state.navTasksPage = 0
+		}
   },
   actions: {
     taskAdd ({ commit }, task) {
@@ -69,6 +73,9 @@ export default {
 		fetchDetailInfoTask({  }, taskId) {
 			return tasksApi.getTask(taskId).then(res => res.data.task)
 			.catch(err => console.error(err))
+		},
+		async clearTasks({ commit }) {
+			await commit('CLEAR_TASKS_CACHE')
 		}
   },
   getters: {
