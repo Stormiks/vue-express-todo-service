@@ -14,7 +14,6 @@ module.exports.profile = (req, res) => {
 		if (user.tasks.length) {
 			const tasks = user.tasks
 			user.tasks = {}
-			console.log(user.tasks);
 
 			tasks.forEach(t => {
 				if (t.checked) countChecked ++;
@@ -27,7 +26,6 @@ module.exports.profile = (req, res) => {
 			user.tasks.countNotChecked = countNotChecked;
 		}
 
-		console.log(user.tasks);
 		res.status(200).send({
 			msg: 'Success!',
 			user
