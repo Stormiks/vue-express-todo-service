@@ -20,7 +20,7 @@
         button(type="submit", @click.prevent="register") Зарегестрироваться
 
       div.form__footer
-        p 
+        p
           span Уже есть аккаунт?
           router-link(to="/login") Войти
 </template>
@@ -58,6 +58,13 @@
               })
 
               this.$router.push({ name: 'todo', params: { userlogin: this.userLogin } })
+            } else if (ctx.error) {
+              this.$notify({
+                group: 'auth',
+                type: 'error',
+                title: ctx.header,
+                text: ctx.error,
+              })
             }
           })
       },

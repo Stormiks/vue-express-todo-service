@@ -59,34 +59,32 @@
       logged() {
         if (!this.validationForm) return (this.loginError = true)
 
-        this.$store
-          .dispatch('authLogin', {
-            login: this.login,
-            password: this.pass,
-          })
-          .then(ctx => {
-            if (ctx.msg) {
-              this.$notify({
-                group: 'auth',
-                type: 'success',
-                title: 'Вход',
-                text: `Пользователь "${ctx.login}" успешно вошел в личный кабинет!`,
-              })
+        this.$store.dispatch('authLogin', {
+          login: this.login,
+          password: this.pass,
+        }).then(ctx => {
+          if (ctx.msg) {
+            this.$notify({
+              group: 'auth',
+              type: 'success',
+              title: 'Вход',
+              text: `Пользователь "${ctx.login}" успешно вошел в личный кабинет!`,
+            })
 
-              if (this.userLogin) this.loginError = false
+            if (this.userLogin) this.loginError = false
 
-              this.$router.push({ name: 'todo', params: { userlogin: this.userLogin } })
-            } else if (ctx.error) {
-              this.loginError = true
+            this.$router.push({ name: 'todo', params: { userlogin: this.userLogin } })
+          } else if (ctx.error) {
+            this.loginError = true
 
-              this.$notify({
-                group: 'auth',
-                type: 'error',
-                title: 'Login',
-                text: `${ctx.error}: ${ctx.trace.message}`,
-              })
-            }
-          })
+            this.$notify({
+              group: 'auth',
+              type: 'error',
+              title: ctx.header,
+              text: ctx.error,
+            })
+          }
+        })
       },
     },
   }

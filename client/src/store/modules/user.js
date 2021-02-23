@@ -67,7 +67,8 @@ export default {
         return { error: res.data.error }
       }).catch(err => {
         return {
-          error: 'Error function "authLogin"',
+          header: `${err.response.status} ${err.response.statusText}`,
+          error: err.response.data.error,
           trace: err
         }
       })
@@ -91,7 +92,8 @@ export default {
         return res.data
       }).catch(err => {
         return {
-          error: 'Error function "authRegister"',
+          header: `${err.response.status} ${err.response.statusText}`,
+          error: err.response.data.error,
           trace: err
         }
       })
