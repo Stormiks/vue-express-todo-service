@@ -1,7 +1,12 @@
 <template>
   <li :class="{ check: task.checked }">
     <div class="task__wrapper" :class="{ 'task__dropdown--open': expanded }">
-      <label :class="`task-label-checkbox-${task.id}`" :for="`task-${task.id}`" @click.stop="changeChecked">
+      <label
+        v-if="keyIsChecked"
+        :class="`task-label-checkbox-${task.id}`"
+        :for="`task-${task.id}`"
+        @click.stop="changeChecked"
+      >
         <input :id="`task-${task.id}`" type="checkbox" :checked="task.checked" />
       </label>
       <div class="task__title-wrapper">
@@ -42,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="btn__group">
+      <div class="btn__group" v-if="visibleControlsBtn">
         <button v-if="!task.checked" class="btn btn-primary btn--task-remove" type="button" @click.stop="createTask">
           <SvgIcon :name="'pencil'" />
         </button>
@@ -68,6 +73,10 @@
     props: {
       task: Object,
       index: Number,
+      visibleControlsBtn: {
+        type: Boolean,
+        default: true
+      },
       removeTask: {
         type: Function,
       },
@@ -88,6 +97,9 @@
       isDescription() {
         return this.task.text !== '' && this.task.text !== null
       },
+      keyIsChecked() {
+        return Object.prototype.hasOwnProperty.call(this.task, 'checked')
+      }
     },
     watch: {
       textTask(newText) {
