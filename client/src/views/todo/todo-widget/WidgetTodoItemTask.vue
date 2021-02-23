@@ -1,12 +1,12 @@
 <template>
   <li :class="{ check: task.checked }">
     <div class="task__wrapper" :class="{ 'task__dropdown--open': expanded }">
-      <label :class="`task-label-checkbox-${index}`" :for="`task-${task.id}`" @click="changeChecked">
+      <label :class="`task-label-checkbox-${task.id}`" :for="`task-${task.id}`" @click.stop="changeChecked">
         <input :id="`task-${task.id}`" type="checkbox" :checked="task.checked" />
       </label>
       <div class="task__title-wrapper">
         <transition-group name="bounceInRight">
-          <span class="task__title" :key="`span-${index}`" v-show="!isEditTask">
+          <span class="task__title" :key="`span-${task.id}`" v-show="!isEditTask">
             <router-link
               :to="{
                 name: 'todo-detail',
@@ -18,8 +18,8 @@
           </span>
           <input
             class="task__title--create"
-            :ref="`inputTextCreate${this.index}`"
-            :key="`input-${index}`"
+            :ref="`inputTextCreate-${task.id}`"
+            :key="`input-${task.id}`"
             v-show="isEditTask"
             type="text"
             v-model.trim="textTask"
@@ -32,7 +32,7 @@
             Создан: {{ convertDateCreated(task.createdAt) }}
           </span>
           <div class="icon-group">
-            <i class="icon" v-if="task.text" @click="expanded = !expanded">
+            <i class="icon" v-if="task.text" @click.stop="expanded = !expanded">
               <SvgIcon :name="'article'" :class="{ active: expanded }" />
             </i>
             <i class="icon icon__text">
@@ -43,10 +43,10 @@
         </div>
       </div>
       <div class="btn__group">
-        <button class="btn btn-primary btn--task-remove" type="button" @click="createTask">
+        <button v-if="!task.checked" class="btn btn-primary btn--task-remove" type="button" @click.stop="createTask">
           <SvgIcon :name="'pencil'" />
         </button>
-        <button class="btn btn-danger btn--task-remove" type="button" @click="removeTask(index)">
+        <button class="btn btn-danger btn--task-remove" type="button" @click.stop="removeTask(index)">
           <SvgIcon :name="'basket'" />
         </button>
       </div>
@@ -120,7 +120,7 @@
         this.isEditTask = !this.isEditTask
 
         this.$nextTick(() => {
-          if (this.isEditTask) this.$refs[`inputTextCreate${this.index}`].focus()
+          if (this.isEditTask) this.$refs[`inputTextCreate-${this.task.id}`].focus()
         })
       },
     },
@@ -208,9 +208,18 @@
       &.icon__text {
         display: flex;
         align-items: center;
+
+        * {
+          pointer-events: none;
+        }
+
+        &:hover {
+          cursor: initial;
+        }
       }
 
       .icon__count {
+        color: #000;
         font-size: 1rem;
         padding-left: 0.2em;
         padding-right: 0.2em;
@@ -225,6 +234,9 @@
   }
 
   .btn__group {
+    display: flex;
+    align-items: center;
+
     .btn ~ .btn {
       margin-left: 5px;
     }
