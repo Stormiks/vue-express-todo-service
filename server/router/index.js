@@ -24,7 +24,7 @@ module.exports = (app) => {
 	router.post('/register', AuthController.register);
 
 	router.patch('/todos', TaskController.updateTask)
-	router.get('/todos', getJWTConfig, TaskController.findTasks);
+	router.get('/todos', getJWTConfig(), TaskController.findTasks);
 	router.get('/todos/:taskId', TaskController.findTask);
 	router.delete('/todos/del/:userId/:taskId', TaskController.deleteTask);
 	router.post('/todos/add', TaskController.addTask);
