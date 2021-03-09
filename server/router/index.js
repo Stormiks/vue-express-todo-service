@@ -16,28 +16,14 @@ const upload = multer({
 });
 
 const router = Router();
-const AuthController = require('../controllers/auth.controller');
-const TaskController = require('../controllers/task.controller');
+
 const UserController = require('../controllers/user.controller');
-const CommentController = require('../controllers/comment.controller');
 
 module.exports = (app) => {
-	router.post('/login', AuthController.login);
-	router.post('/register', AuthController.register);
-
-	router.patch('/todos', TaskController.updateTask)
-	router.get('/todos', TaskController.findTasks);
-	router.get('/todos/active', TaskController.findTasksToActual);
-	router.get('/todos/:taskId', TaskController.findTask);
-	router.delete('/todos/del/:userId/:taskId', TaskController.deleteTask);
-	router.post('/todos/add', TaskController.addTask);
-
-	router.get('/todos/comments/:taskId', CommentController.findTaskComments);
-	router.get('/todos/comments/count/:taskId', CommentController.countTaskComments);
-	router.post('/comments/add', CommentController.addComment);
-
-	router.get('/profile/:userId', UserController.profile);
-	router.post('/profile/:userId', upload.single("image"), UserController.updateProfile);
+	require('./auth')(router);
+	require('./todos')(router);
+	require('./users')(router, upload);
+	require('./comments')(router);
 
 	router.get('/users', UserController.all);
 
