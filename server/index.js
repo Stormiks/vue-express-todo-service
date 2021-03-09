@@ -8,7 +8,8 @@ const { Sequelize } = require('sequelize');
 const morgan = require('morgan');
 const app = express();
 const dotenv = require('dotenv');
-const crypto = require('crypto')
+const crypto = require('crypto');
+const passport = require('passport');
 
 fs.readFile('./.env', 'utf8', function(err, data) {
 	if (err) return
@@ -31,8 +32,12 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(history());
+
 app.use('/file', express.static(path.join(__dirname, 'uploads')));
 app.use(express.static('views'));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./router/')(app);
 
