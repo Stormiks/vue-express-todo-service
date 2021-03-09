@@ -1,0 +1,7 @@
+GET http://localhost:8081/api/todos?userId=1 HTTP/1.1
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJTa3lsaW5rZXI1IiwiaWF0IjoxNjE0MTY0NDcyfQ.OV-0_NkYMNDLwDn5d3l-HtBLB01WqV3mW_M-RrnpNcc
+
+###
+
+POST http://localhost:8081/api/login HTTP/1.1
