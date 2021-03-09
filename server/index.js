@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path')
 const bodyParser = require('body-parser');
 const history = require('connect-history-api-fallback') // Для корректной работы vue-router в express
@@ -11,18 +10,7 @@ const dotenv = require('dotenv');
 const crypto = require('crypto');
 const passport = require('passport');
 
-fs.readFile('./.env', 'utf8', function(err, data) {
-	if (err) return
-	let strEnvFile = data.match(/SECRET_JWT=null/gi)
-	if (strEnvFile) {
-		const secretToken = crypto.randomBytes(64).toString('hex');
-		data = data.replace(/SECRET_JWT=null/gi, `SECRET_JWT=${secretToken}`)
-		fs.writeFile('./.env', data , function(err) {
-			if(err) return console.error(err);
-			console.log('done', data);
-		})
-	}
-})
+require('./config/load.env');
 
 dotenv.config()
 
