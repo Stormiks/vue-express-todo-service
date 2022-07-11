@@ -1,33 +1,31 @@
-'use strict';
+const bcrypt = require('bcrypt')
+
+function hashPass(password) {
+	return bcrypt.hashSync(password, 8)
+}
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		/**
-		 * Add seed commands here.
-		 *
-		 * Example:
-		 * await queryInterface.bulkInsert('People', [{
-		 *   name: 'John Doe',
-		 *   isBetaMember: false
-		 * }], {});
-		*/
 		await queryInterface.bulkInsert('users', [{
 			login: 'John_Doe',
 			name: 'John Doe',
-			password: '123456',
+			password: hashPass('123456'),
 			avatar: '',
 			admin: 0,
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},{
+			login: 'admin',
+			name: 'Admin',
+			password: hashPass('12345678'),
+			avatar: '',
+			admin: 1,
 			createdAt: new Date(),
 			updatedAt: new Date()
 		}], {});
 	},
 
 	down: async (queryInterface, Sequelize) => {
-		/**
-		 * Add commands to revert seed here.
-		 *
-		 * Example:
-		 * await queryInterface.bulkDelete('People', null, {});
-		 */
+		await queryInterface.bulkDelete('users', null, {});
 	}
 };
