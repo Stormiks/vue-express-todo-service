@@ -37,10 +37,10 @@
             Создан: {{ convertDateCreated(task.createdAt) }}
           </span>
           <div class="icon-group">
-            <i class="icon" v-if="task.text" @click.stop="expanded = !expanded">
+            <i class="icon" v-if="task.text" @click.stop="expanded = !expanded" title="Описание">
               <SvgIcon :name="'article'" :class="{ active: expanded }" />
             </i>
-            <i class="icon icon__text">
+            <i class="icon icon__text" title="Комментарии">
               <span class="icon__count">{{ task.countComments || 0 }}</span>
               <SvgIcon :name="'comments-todo'" />
             </i>
