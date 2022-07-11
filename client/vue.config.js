@@ -58,6 +58,6 @@ module.exports = {
 	},
   devServer: {
     historyApiFallback: true,
-    proxy: 'http://localhost:8081'
+    proxy: 'http://localhost:8082'
   }
 }
