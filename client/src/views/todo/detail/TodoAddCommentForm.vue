@@ -1,15 +1,16 @@
 <template>
   <form class="comments__form" @submit.stop.prevent="addComment">
-    <div class="form__field">
+    <div class="form-group form__field">
       <label :for="`task-form-${todoId}`">Добавить комментарий:</label>
       <textarea
+        class="form-control"
         v-model.trim="formInputComment"
         @keydown.enter.stop="addComment"
         :name="`task-${todoId}-comment`"
         :id="`task-form-${todoId}`"
       ></textarea>
     </div>
-    <button type="submit">Добавить</button>
+    <button class="btn btn-primary" type="submit">Добавить</button>
   </form>
 </template>
 

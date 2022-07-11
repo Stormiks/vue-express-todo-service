@@ -8,6 +8,7 @@ form
         v-model.trim="task"
       )
       button.btn.btn--clear-field(
+        v-show="isValidNewTask"
         type="button"
         @click="clearField"
         :class="{ 'transform-visible': isValidNewTask }"
@@ -64,7 +65,7 @@ form
       },
     },
     methods: {
-      addTask(e) {
+      addTask() {
         if (!this.isValidNewTask) return
 
         this.$emit('event-new-task', {

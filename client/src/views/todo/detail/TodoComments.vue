@@ -13,7 +13,7 @@
 
 <script>
   import TodoComment from './TodoComment'
-  import { mapState, mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'TodoComments',
