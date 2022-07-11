@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import moment from 'moment'
+  import dayjs from 'dayjs'
 
   export default {
     name: 'TodoComment',
@@ -28,7 +28,7 @@
     },
     computed: {
       convertDateCreated() {
-        return moment(this.createdAt).format('YYYY-MM-DD HH:mm')
+        return dayjs(this.createdAt).format('YYYY-MM-DD HH:mm')
       },
     },
   }

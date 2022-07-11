@@ -66,7 +66,7 @@
 
 <script>
   import TransitionExpand from '@/components/TransitionExpand'
-  import moment from 'moment'
+  import dayjs from 'dayjs'
   import SvgIcon from '@/components/SvgIcon'
 
   export default {
@@ -118,7 +118,7 @@
     },
     methods: {
       convertDateCreated(date) {
-        return moment(date).format('YYYY-MM-DD HH:mm')
+        return dayjs(date).format('YYYY-MM-DD HH:mm')
       },
       changeChecked() {
         const checked = !this.task.checked
