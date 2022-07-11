@@ -18,6 +18,7 @@ export default {
       state.tasks.unshift({
         id: task.id,
         title: task.title,
+        text: task.text,
         checked: task.checked,
         createdAt: task.createdAt
       })

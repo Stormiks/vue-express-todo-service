@@ -1,6 +1,6 @@
 const { sequelize, user, task } = require('../db/models/');
 const jsonwebtoken = require('jsonwebtoken');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 function genJWTToken({ id, login }) {
 	return jsonwebtoken.sign({

@@ -69,7 +69,7 @@ form
 
         this.$emit('event-new-task', {
           title: this.task,
-          description: this.description,
+          text: this.description,
           checked: false,
         })
 
