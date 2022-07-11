@@ -41,7 +41,7 @@
               <SvgIcon :name="'article'" :class="{ active: expanded }" />
             </i>
             <i class="icon icon__text">
-              <span class="icon__count">{{ task.countComments }}</span>
+              <span class="icon__count">{{ task.countComments || 0 }}</span>
               <SvgIcon :name="'comments-todo'" />
             </i>
           </div>

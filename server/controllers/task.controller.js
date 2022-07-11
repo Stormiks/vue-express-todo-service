@@ -97,7 +97,7 @@ module.exports.addTask = (req, res) => {
 	task.create({
 		title: req.body.title,
 		checked: req.body.checked,
-		text: req.body.description,
+		text: req.body.text,
 		userId: req.body.userId
 	}, { model: user }).then(task => {
 		res.status(200).send({

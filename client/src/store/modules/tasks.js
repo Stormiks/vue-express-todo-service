@@ -1,4 +1,5 @@
 /* eslint-disable no-empty-pattern */
+import Vue from 'vue'
 import tasksApi from './../../api/tasks'
 
 export default {
@@ -15,9 +16,10 @@ export default {
       state.tasksActive = tasks
     },
     ADD_TASK(state, task) {
-      state.tasks.unshift({
+      Vue.set(state.tasks, state.tasks.length, {
         id: task.id,
         title: task.title,
+        text: task.text,
         checked: task.checked,
         createdAt: task.createdAt
       })
